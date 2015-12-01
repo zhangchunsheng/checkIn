@@ -11,6 +11,29 @@
 class IndexController extends Yaf_Controller_Abstract {
     // default action name
     public function indexAction() {
-        $this->getView()->content = "Hello World";
+        $activityId = $_GET['activity_id'];
+        $isAdmin = isset($_GET['is_admin']) ? $_GET['is_admin'] : 0;
+
+        $activity = new ActivityModel();
+        $activityData = $activity->getDataById($activityId);
+
+        $activityMembers = new ActivityMembersModel();
+        $activityMembersData = $activityMembers->getDataById($activityId);
+
+        $roundNum = $activityData['round_num'];
+        $activityCheckInLog = new ActivityCheckInLogModel();
+        $activityCheckInLogData = $activityCheckInLog->getRoundDataById($activityId, $roundNum);
+
+        foreach($activityMembersData as &$value) {
+            if(isset($activityCheckInLogData[$value['activity_member_id']])) {
+                $value['is_checked'] = 1;
+            } else {
+                $value['is_checked'] = 0;
+            }
+        }
+
+        $this->getView()->isAdmin = $isAdmin;
+        $this->getView()->activityData = $activityData;
+        $this->getView()->activityMembersData = $activityMembersData;
     }
 }

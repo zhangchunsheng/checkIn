@@ -37,3 +37,23 @@ create table activity_check_in_log(
     check_time int(11) not null default 0 comment '创建时间',
     primary key(activity_check_in_log_id)
 );
+
+insert into activity(activity_name,activity_description,member_num,round_num,round_check_num,create_time,status)
+values
+('2015年网站组团建-滑雪','2015年网站组团建-滑雪',11,1,0,unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'张春生',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'郭晓东',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'王晶',unix_timestamp(now()),1);
+
+insert into activity_check_in_log(activity_id,round_num,activity_member_id,check_time)
+values
+(1,1,1,unix_timestamp(now()));

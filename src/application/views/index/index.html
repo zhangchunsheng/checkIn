@@ -1,8 +1,64 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <title>Hello World</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>活动签到系统</title>
+    <meta name="description" content="活动签到系统">
+    <meta name="author" content="zhangchunsheng">
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/theme.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <?php echo $content; ?>
+    <div>
+        活动名称：<?=$activityData["activity_name"];?><br/>
+        正在进行第<?=$activityData["round_num"];?>轮签到<br/>
+        应到<?=$activityData["member_num"];?>人，实到<?=$activityData["round_check_num"];?>人
+    </div>
+    <br/>
+    <?php
+        if($isAdmin) {
+            echo '<div><button type="button" class="btn btn-info">开始新一轮签到</button></div><br/>';
+        }
+    ?>
+    <div class="container-fluid">
+        <div class="row show-grid">
+            <div class="col-xs-4">姓名</div>
+            <div class="col-xs-4">是否签到</div>
+            <div class="col-xs-4">操作</div>
+        </div>
+        <?php
+            foreach($activityMembersData as $value) {
+                echo '<div id="' . $value['activity_member_id'] . '" class="row show-grid">
+                    <div class="col-xs-4">' . $value['member_name'] . '</div>
+                    <div class="col-xs-4">' . ($value['is_checked'] ? '是' : '否') . '</div>
+                    <div class="col-xs-4">';
+                if(!$value['is_checked']) {
+                    echo '<button id="' . $value['activity_member_id'] . '" type="button" class="btn btn-success">签到</button>';
+                }
+                echo '</div>
+                </div>';
+            }
+        ?>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

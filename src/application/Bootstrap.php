@@ -40,8 +40,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
     }
 
     public function _initDb(Yaf_Dispatcher $dispatcher) {
-        $this->_db = new medoo($this->_config->mysql->read->toArray());
-        Yaf_Registry::set('_db', $this->_db);
+        \Db\Factory::create();
     }
 
     public function _initSession($dispatcher) {
