@@ -21,4 +21,11 @@ class ActivityModel extends BaseModel {
         ]);
         return $data[0];
     }
+
+    public function updateActivity($activityId, $data) {
+        $result = $this->_db->update($this->_table, $data, [
+            "activity_id" => $activityId
+        ]);
+        return $result;
+    }
 }

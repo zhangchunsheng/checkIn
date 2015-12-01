@@ -26,6 +26,7 @@
 </head>
 <body>
     <div>
+        <input id="activity_id" type="hidden" value="<?=$activityData['activity_id'];?>" />
         活动名称：<?=$activityData["activity_name"];?><br/>
         正在进行第<?=$activityData["round_num"];?>轮签到<br/>
         应到<?=$activityData["member_num"];?>人，实到<?=$activityData["round_check_num"];?>人
@@ -57,8 +58,37 @@
         ?>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        //http://checkin.luomor.com/index/index/updateActivity?activity_id=1
+        //https://jquery.com/
+        $(document).ready(function() {
+            var activityId = $("#activity_id").val();
+
+            $('.btn-info').click(function() {
+                $.ajax({
+                    url: 'index/index/updateActivity?activity_id=' + activityId,
+                    success: function(data) {
+                        data = JSON.parse(data);
+                        if(data.ret_code == 200) {
+                            alert("更新成功");
+                        }
+                    },
+                    complete: function(xhr) {
+
+                    },
+                    error: function(xhr, error, e) {
+
+                    }
+                });
+            });
+
+            $('.btn-success').click(function() {
+
+            });
+        });
+    </script>
 </body>
 </html>
