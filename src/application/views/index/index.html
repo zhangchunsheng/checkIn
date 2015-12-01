@@ -27,7 +27,9 @@
 <body>
     <div>
         <input id="activity_id" type="hidden" value="<?=$activityData['activity_id'];?>" />
+        <input id="round_num" type="hidden" value="<?=$roundNum;?>" />
         活动名称：<?=$activityData["activity_name"];?><br/>
+        查看第<?=$roundNum;?>轮签到<br/>
         正在进行第<?=$activityData["round_num"];?>轮签到<br/>
         应到<?=$activityData["member_num"];?>人，实到<?=$activityData["round_check_num"];?>人
     </div>
@@ -51,6 +53,8 @@
                     <div class="col-xs-4">';
                 if(!$value['is_checked']) {
                     echo '<button id="' . $value['activity_member_id'] . '" type="button" class="btn btn-success">签到</button>';
+                } else {
+                    echo '签到成功';
                 }
                 echo '</div>
                 </div>';
@@ -63,13 +67,16 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
         //http://checkin.luomor.com/index/index/updateActivity?activity_id=1
+        //http://checkin.luomor.com/index/index/checkIn?activity_id=1&round_num=1&activity_member_id=2
         //https://jquery.com/
         $(document).ready(function() {
             var activityId = $("#activity_id").val();
+            var roundNum = $("#round_num").val();
 
             $('.btn-info').click(function() {
                 $.ajax({
                     url: 'index/index/updateActivity?activity_id=' + activityId,
+                    type: 'GET',
                     success: function(data) {
                         data = JSON.parse(data);
                         if(data.ret_code == 200) {
@@ -86,7 +93,34 @@
             });
 
             $('.btn-success').click(function() {
+                var obj = $(this);
+                var activityMemberId = $(this).attr("id");
+                var data = {
+                    activity_id: activityId,
+                    round_num: roundNum,
+                    activity_member_id: activityMemberId
+                };
+                $.ajax({
+                    url: 'index/index/checkIn',
+                    data: data,
+                    type: 'GET',
+                    success: function(data) {
+                        data = JSON.parse(data);
+                        if(data.ret_code == 200) {
+                            obj.parent().parent().children().eq(1).html("是");
+                            obj.parent().html("签到成功");
+                        } else if(data.ret_code == 406) {
+                            obj.parent().parent().children().eq(1).html("是");
+                            obj.parent().html("签到成功");
+                        }
+                    },
+                    complete: function(xhr) {
 
+                    },
+                    error: function(xhr, error, e) {
+
+                    }
+                });
             });
         });
     </script>

@@ -23,6 +23,8 @@ class ActivityModel extends BaseModel {
     }
 
     public function updateActivity($activityId, $data) {
+        $data['update_time'] = time();
+
         $result = $this->_db->update($this->_table, $data, [
             "activity_id" => $activityId
         ]);

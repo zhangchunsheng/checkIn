@@ -30,4 +30,29 @@ class ActivityCheckInLogModel extends BaseModel {
         }
         return $data;
     }
+
+    public function hadChecked($activityId, $roundNum, $activityMemberId) {
+        $rows = $this->_db->select($this->_table, "*", [
+            "AND" => [
+                "activity_id" => $activityId,
+                "round_num" => $roundNum,
+                "activity_member_id" => $activityMemberId,
+            ]
+        ]);
+        $result = false;
+        if($rows) {
+            $result = true;
+        }
+        return $result;
+    }
+
+    public function checkIn($activityId, $roundNum, $activityMemberId) {
+        $result = $this->_db->insert($this->_table, [
+            "activity_id" => $activityId,
+            "round_num" => $roundNum,
+            "activity_member_id" => $activityMemberId,
+            "check_time" => time()
+        ]);
+        return $result;
+    }
 }
