@@ -47,9 +47,13 @@
         </div>
         <?php
             foreach($activityMembersData as $value) {
-                echo '<div id="' . $value['activity_member_id'] . '" class="row show-grid">
-                    <div class="col-xs-4">' . $value['member_name'] . '</div>
-                    <div class="col-xs-4">' . ($value['is_checked'] ? '是' : '否') . '</div>
+                echo '<div id="' . $value['activity_member_id'] . '" class="row show-grid">';
+                if(empty($value['cellphone'])) {
+                    echo '<div class="col-xs-4">' . $value['member_name'] . '</div>';
+                } else {
+                    echo '<div class="col-xs-4"><a href="tel:' . $value['cellphone'] . '">' . $value['member_name'] . '</a></div>';
+                }
+                echo '<div class="col-xs-4">' . ($value['is_checked'] ? '是' : '否') . '</div>
                     <div class="col-xs-4">';
                 if(!$value['is_checked']) {
                     echo '<button id="' . $value['activity_member_id'] . '" type="button" class="btn btn-success">签到</button>';
