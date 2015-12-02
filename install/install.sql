@@ -52,7 +52,39 @@ values
 
 insert into activity_members(activity_id,member_name,create_time,status)
 values
-(1,'王晶',unix_timestamp(now()),1);
+(1,'晓东家属',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'张重',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'何霄鹏',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'征安全',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'征安全家属',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'鑫昌',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'吴建飞',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'肖昊',unix_timestamp(now()),1);
+
+insert into activity_members(activity_id,member_name,create_time,status)
+values
+(1,'宋新凯',unix_timestamp(now()),1);
 
 insert into activity_check_in_log(activity_id,round_num,activity_member_id,check_time)
 values
