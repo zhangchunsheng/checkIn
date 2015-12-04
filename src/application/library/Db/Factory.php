@@ -15,7 +15,7 @@ class Factory {
     private static $_instances;
 
     static public function create($which = 'master') {
-        $dbConfig = \Yaf_Registry::get('config')->db->$which;
+        $dbConfig = \Yaf\Registry::get('config')->db->$which;
         $_dbHost = $dbConfig->server;
         $_dbName = $dbConfig->database_name;
 

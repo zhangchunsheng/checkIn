@@ -8,7 +8,7 @@
  * @version V1.0
  * @date 2015-12-01 23:36
  */
-class IndexController extends Yaf_Controller_Abstract {
+class IndexController extends \Yaf\Controller_Abstract {
     // default action name
     public function indexAction() {
         $activityId = isset($_GET['activity_id']) ? $_GET['activity_id'] : 1;

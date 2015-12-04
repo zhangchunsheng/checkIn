@@ -14,6 +14,11 @@ define("APPLICATION_PATH",  dirname(dirname(__FILE__)));
 define('APP_PATH', dirname(__FILE__) . '/../');
 define('DEBUG', 1);
 
-$app  = new Yaf_Application(APPLICATION_PATH . "/conf/application.ini");
+if (file_exists(APP_PATH . '/conf/autoload.php')) {
+    require_once APP_PATH . '/conf/autoload.php';
+    spl_autoload_register('autoload');
+}
+
+$app  = new \Yaf\Application(APPLICATION_PATH . "/conf/application.ini");
 $app->bootstrap() //call bootstrap methods defined in Bootstrap.php
 ->run();

@@ -9,10 +9,10 @@
  * @version V1.0
  * @date 2015-12-01 23:33
  */
-class UserPlugin extends Yaf_Plugin_Abstract {
-    public function routerStartup(Yaf_Request_Abstract $request, Yaf_Response_Abstract $response) {
+class UserPlugin extends \Yaf\Plugin_Abstract {
+    public function routerStartup(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response) {
     }
-    public function routerShutdown(Yaf_Request_Abstract $request, Yaf_Response_Abstract $response) {
+    public function routerShutdown(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response) {
 
     }
 }
