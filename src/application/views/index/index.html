@@ -67,7 +67,7 @@
                 } elseif($isAdmin) {
                     echo '<div class="' . $class . '">无手机号</div>';
                 }
-                echo '<div class="' . $class . '">' . ($value['is_checked'] ? '是' : '否') . '</div>
+                echo '<div class="' . $class . ' is_checked">' . ($value['is_checked'] ? '是' : '否') . '</div>
                     <div class="' . $class . '">';
                 if(!$value['is_checked']) {
                     echo '<button id="' . $value['activity_member_id'] . '" type="button" class="btn btn-success">签到</button>';
@@ -125,10 +125,10 @@
                     success: function(data) {
                         data = JSON.parse(data);
                         if(data.ret_code == 200) {
-                            obj.parent().parent().children().eq(1).html("是");
+                            obj.parent().parent().children('.is_checked').html("是");
                             obj.parent().html("签到成功");
                         } else if(data.ret_code == 406) {
-                            obj.parent().parent().children().eq(1).html("是");
+                            obj.parent().parent().children('.is_checked').html("是");
                             obj.parent().html("签到成功");
                         }
                     },
