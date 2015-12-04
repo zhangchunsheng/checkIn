@@ -63,7 +63,7 @@
                     echo '<div class="' . $class . '"><a href="tel:' . $value['cellphone'] . '">' . $value['member_name'] . '</a></div>';
                 }
                 if($isAdmin && !empty($value['cellphone'])) {
-                    echo '<div class="' . $class . ' cellphone">' . $value['cellphone'] . '</div>';
+                    echo '<div id="cellphone" class="' . $class . '">' . $value['cellphone'] . '</div>';
                 } elseif($isAdmin) {
                     echo '<div class="' . $class . '">无手机号</div>';
                 }
