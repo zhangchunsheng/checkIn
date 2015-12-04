@@ -38,23 +38,37 @@
         if($isAdmin) {
             echo '<div><button type="button" class="btn btn-info">开始新一轮签到</button></div><br/>';
         }
+        $class = "col-xs-4";
+        if($isAdmin) {
+            $class = "col-xs-3";
+        }
     ?>
     <div class="container-fluid">
         <div class="row show-grid">
-            <div class="col-xs-4">姓名</div>
-            <div class="col-xs-4">是否签到</div>
-            <div class="col-xs-4">操作</div>
+            <?php
+                echo '<div class="' . $class . '">姓名</div>';
+                if($isAdmin) {
+                    echo '<div class="' . $class . '">手机号</div>';
+                }
+                echo '<div class="' . $class . '">是否签到</div>
+                    <div class="' . $class . '">操作</div>';
+            ?>
         </div>
         <?php
             foreach($activityMembersData as $value) {
                 echo '<div id="' . $value['activity_member_id'] . '" class="row show-grid">';
                 if(empty($value['cellphone'])) {
-                    echo '<div class="col-xs-4">' . $value['member_name'] . '</div>';
+                    echo '<div class="' . $class . '">' . $value['member_name'] . '</div>';
                 } else {
-                    echo '<div class="col-xs-4"><a href="tel:' . $value['cellphone'] . '">' . $value['member_name'] . '</a></div>';
+                    echo '<div class="' . $class . '"><a href="tel:' . $value['cellphone'] . '">' . $value['member_name'] . '</a></div>';
                 }
-                echo '<div class="col-xs-4">' . ($value['is_checked'] ? '是' : '否') . '</div>
-                    <div class="col-xs-4">';
+                if($isAdmin && !empty($value['cellphone'])) {
+                    echo '<div class="' . $class . '">' . $value['cellphone'] . '</div>';
+                } else {
+                    echo '<div class="' . $class . '">无手机号</div>';
+                }
+                echo '<div class="' . $class . '">' . ($value['is_checked'] ? '是' : '否') . '</div>
+                    <div class="' . $class . '">';
                 if(!$value['is_checked']) {
                     echo '<button id="' . $value['activity_member_id'] . '" type="button" class="btn btn-success">签到</button>';
                 } else {
