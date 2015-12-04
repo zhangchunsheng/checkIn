@@ -64,7 +64,7 @@
                 }
                 if($isAdmin && !empty($value['cellphone'])) {
                     echo '<div class="' . $class . '">' . $value['cellphone'] . '</div>';
-                } else {
+                } elseif($isAdmin) {
                     echo '<div class="' . $class . '">无手机号</div>';
                 }
                 echo '<div class="' . $class . '">' . ($value['is_checked'] ? '是' : '否') . '</div>
